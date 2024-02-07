@@ -27,6 +27,18 @@ public class Admin {
         this.specials = specials;
     }
 
+    public int getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getName() {
         return this.name;
     }

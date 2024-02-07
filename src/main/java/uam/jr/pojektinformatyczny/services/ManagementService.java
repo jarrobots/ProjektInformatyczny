@@ -15,7 +15,7 @@ public class ManagementService {
         this.manRepository = manRepository;
     }
 
-    public Management add(Management man) {
+    public Management save(Management man) {
         this.manRepository.save(man);
         return man;
     }
@@ -30,5 +30,9 @@ public class ManagementService {
 
     public Iterable<Management> findAll() {
         return this.manRepository.findAll();
+    }
+
+    public boolean checkIfExist(int id){
+        return (manRepository.checkIfExist(id) > 0);
     }
 }

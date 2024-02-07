@@ -24,6 +24,14 @@ public class Team {
         this.des = des;
     }
 
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
+    }
+
     public String getTeamName() {
         return this.teamName;
     }

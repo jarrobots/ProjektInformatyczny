@@ -14,7 +14,7 @@ public class TeamService {
         this.teamRepository = team;
     }
 
-    public Team add(Team team) {
+    public Team save(Team team) {
         this.teamRepository.save(team);
         return team;
     }
@@ -29,6 +29,10 @@ public class TeamService {
 
     public Iterable<Team> findAll() {
         return this.teamRepository.findAll();
+    }
+
+    public boolean checkIfExist(int id){
+        return (teamRepository.checkIfExist(id) > 0);
     }
 }
 

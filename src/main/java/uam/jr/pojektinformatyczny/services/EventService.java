@@ -14,7 +14,7 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public Event add(Event event) {
+    public Event save(Event event) {
         this.eventRepository.save(event);
         return event;
     }
@@ -29,6 +29,9 @@ public class EventService {
 
     public Iterable<Event> findAll() {
         return this.eventRepository.findAll();
+    }
+    public boolean checkIfExist(int id){
+        return (eventRepository.checkIfExist(id) > 0);
     }
 }
 

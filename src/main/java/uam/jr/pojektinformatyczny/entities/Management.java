@@ -31,6 +31,14 @@ public class Management {
         this.event = event;
     }
 
+    public int getManId() {
+        return manId;
+    }
+
+    public void setManId(int manId) {
+        this.manId = manId;
+    }
+
     public String getName() {
         return this.name;
     }

@@ -2,12 +2,14 @@ package uam.jr.pojektinformatyczny.controllers;
 
 import ch.qos.logback.core.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import uam.jr.pojektinformatyczny.entities.Event;
+import uam.jr.pojektinformatyczny.entities.Team;
 import uam.jr.pojektinformatyczny.services.EventService;
+
+import java.util.UUID;
 
 
 @RestController
@@ -27,5 +29,11 @@ public class EventController {
     @GetMapping(value = "/event/{id}")
     public Event getByPublicId(@PathVariable("id") Integer publicId) {
         return this.eventService.findByID(publicId).get();
+    }
+    @PostMapping(value = "/product")
+    public ResponseEntity<Event> create(@RequestBody @Validated Event event) {
+        event.setEventId(Integer.parseInt(UUID.randomUUID().toString()));
+        eventService.save(event);
+        return ResponseEntity.ok().body(event);
     }
 }

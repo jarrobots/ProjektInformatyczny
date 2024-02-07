@@ -2,12 +2,13 @@ package uam.jr.pojektinformatyczny.controllers;
 
 import ch.qos.logback.core.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import uam.jr.pojektinformatyczny.entities.Management;
 import uam.jr.pojektinformatyczny.services.ManagementService;
+
+import java.util.UUID;
 
 
 @RestController
@@ -27,5 +28,12 @@ public class ManagementController {
     @GetMapping(value = "/{id}")
     public Management getByPublicId(@PathVariable("id") Integer publicId) {
         return (Management)this.manService.findByID(publicId).get();
+    }
+
+    @PostMapping(value = "/product")
+    public ResponseEntity<Management> create(@RequestBody @Validated Management man) {
+        man.setManId(Integer.parseInt(UUID.randomUUID().toString()));
+        manService.save(man);
+        return ResponseEntity.ok().body(man);
     }
 }

@@ -14,7 +14,7 @@ public class AdminService {
         this.adminRepository = adminRepository;
     }
 
-    public Admin add(Admin admin) {
+    public Admin save(Admin admin) {
         this.adminRepository.save(admin);
         return admin;
     }
@@ -29,6 +29,10 @@ public class AdminService {
 
     public Iterable<Admin> findAll() {
         return this.adminRepository.findAll();
+    }
+
+    public boolean checkIfExist(int id){
+        return (adminRepository.checkIfExist(id) > 0);
     }
 }
 
