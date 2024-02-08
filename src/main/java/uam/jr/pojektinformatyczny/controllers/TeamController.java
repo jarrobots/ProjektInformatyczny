@@ -33,6 +33,12 @@ public class TeamController {
         return this.teamService.findByID(publicId).get();
     }
 
+    @GetMapping(value = "/count/{id}")
+    public Integer getCountOfDetachedEvents(@PathVariable("id") Integer publicId){
+        return this.teamService.countDetachedEvents(publicId);
+    }
+
+
     @PostMapping(value = "/add")
     public ResponseEntity<Team> create(@RequestBody @Validated Team team) {
         team.setTeamId(Integer.parseInt(UUID.randomUUID().toString()));

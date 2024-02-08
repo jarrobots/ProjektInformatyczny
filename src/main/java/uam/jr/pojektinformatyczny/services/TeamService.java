@@ -34,5 +34,8 @@ public class TeamService {
     public boolean checkIfExist(int id){
         return (teamRepository.checkIfExist(id) > 0);
     }
+
+    public Integer countDetachedEvents(int id){ return teamRepository.countEvents(id);}
+
 }
 

@@ -49,8 +49,8 @@ public class ManagementController {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }
-
-    @DeleteMapping(value = "/product/{id}")
+    @ResponseBody
+    @DeleteMapping(value = "/man/{id}" )
     public RedirectView delete(@PathVariable Integer id) {
         manService.deleteById(id);
         return new RedirectView("/api/productsList", true);
