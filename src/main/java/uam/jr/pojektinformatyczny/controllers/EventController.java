@@ -50,10 +50,10 @@ public class EventController {
         }
     }
 
-    @DeleteMapping(value = "/product/{id}")
+    @DeleteMapping(value = "/event/{id}", produces = "application/json")
     public RedirectView delete(@PathVariable Integer id) {
         eventService.deleteById(id);
-        return new RedirectView("/api/productsList", true);
+        return new RedirectView("/api/list", true);
     }
 
     @ExceptionHandler

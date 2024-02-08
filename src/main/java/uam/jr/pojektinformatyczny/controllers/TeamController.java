@@ -55,10 +55,11 @@ public class TeamController {
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
     }
-    @DeleteMapping(value = "/product/{id}")
+
+    @DeleteMapping(value = "/team/{id}", produces = "application/json")
     public RedirectView delete(@PathVariable Integer id) {
         teamService.deleteById(id);
-        return new RedirectView("/api/productsList", true);
+        return new RedirectView("/list", true);
     }
 
     @ExceptionHandler

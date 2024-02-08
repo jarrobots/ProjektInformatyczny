@@ -50,10 +50,10 @@ public class ManagementController {
         }
     }
     @ResponseBody
-    @DeleteMapping(value = "/man/{id}" )
+    @DeleteMapping(value = "/man/{id}", produces = "application/json")
     public RedirectView delete(@PathVariable Integer id) {
         manService.deleteById(id);
-        return new RedirectView("/api/productsList", true);
+        return new RedirectView("/man/list", true);
     }
 
     @ExceptionHandler

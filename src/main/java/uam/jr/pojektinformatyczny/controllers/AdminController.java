@@ -50,10 +50,10 @@ public class AdminController {
         }
     }
 
-    @DeleteMapping(value = "/product/{id}")
+    @DeleteMapping(value = "/admin/{id}", produces = "application/json")
     public RedirectView delete(@PathVariable Integer id) {
         adminService.deleteById(id);
-        return new RedirectView("/api/productsList", true);
+        return new RedirectView("/admin/list", true);
     }
 
     @ExceptionHandler
