@@ -2,9 +2,12 @@ package uam.jr.pojektinformatyczny.controllers;
 
 import ch.qos.logback.core.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 import uam.jr.pojektinformatyczny.entities.Team;
 import uam.jr.pojektinformatyczny.services.TeamService;
 
@@ -12,7 +15,7 @@ import java.util.UUID;
 
 
 @RestController
-@RequestMapping({"/team"})
+@RequestMapping("/team")
 public class TeamController {
     @Autowired
     private TeamService teamService;
@@ -20,7 +23,7 @@ public class TeamController {
     public TeamController() {
     }
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/list")
     public Iterable<Team> list(Model model) {
         return this.teamService.findAll();
     }
@@ -30,11 +33,32 @@ public class TeamController {
         return this.teamService.findByID(publicId).get();
     }
 
-    @PostMapping(value = "/product")
+    @PostMapping(value = "/add")
     public ResponseEntity<Team> create(@RequestBody @Validated Team team) {
         team.setTeamId(Integer.parseInt(UUID.randomUUID().toString()));
         teamService.save(team);
         return ResponseEntity.ok().body(team);
+    }
+
+    @PutMapping(value = "/put")
+    public ResponseEntity<Void> edit(@RequestBody Team team) {
+        if (!teamService.checkIfExist(team.getTeamId()))
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        else {
+            teamService.save(team);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+    }
+    @DeleteMapping(value = "/product/{id}")
+    public RedirectView delete(@PathVariable Integer id) {
+        teamService.deleteById(id);
+        return new RedirectView("/api/productsList", true);
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public String handleException(MethodArgumentNotValidException exception) {
+        return exception.getFieldError().toString();
     }
 }
 

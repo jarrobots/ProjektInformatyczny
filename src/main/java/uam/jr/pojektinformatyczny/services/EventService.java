@@ -19,11 +19,11 @@ public class EventService {
         return event;
     }
 
-    public Optional<Event> findByID(int id) {
+    public Optional<Event> findById(int id) {
         return this.eventRepository.findById(id);
     }
 
-    public void deleteByID(int id) {
+    public void deleteById(int id) {
         this.eventRepository.deleteById(id);
     }
 

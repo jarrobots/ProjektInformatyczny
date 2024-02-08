@@ -24,7 +24,7 @@ public class ManagementService {
         return this.manRepository.findById(id);
     }
 
-    public void deleteByID(int id) {
+    public void deleteById(int id) {
         this.manRepository.deleteById(id);
     }
 

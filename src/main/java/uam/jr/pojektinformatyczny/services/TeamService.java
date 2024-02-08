@@ -23,7 +23,7 @@ public class TeamService {
         return this.teamRepository.findById(id);
     }
 
-    public void deleteByID(int id) {
+    public void deleteById(int id) {
         this.teamRepository.deleteById(id);
     }
 

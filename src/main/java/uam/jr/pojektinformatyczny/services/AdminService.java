@@ -23,7 +23,7 @@ public class AdminService {
         return this.adminRepository.findById(id);
     }
 
-    public void delete(int id) {
+    public void deleteById(int id) {
         this.adminRepository.deleteById(id);
     }
 
